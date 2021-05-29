@@ -10,6 +10,10 @@
     "prettier": "prettier --write contracts/*.sol",
     "lint": "solhint contracts/*.sol"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aggrofinance/aggro-v1-sc.git"
+  },
   "keywords": [
     "solidity",
     "defi",
@@ -47,5 +51,9 @@
     "ts-node": "^10.0.0",
     "typechain": "^5.0.0",
     "typescript": "^4.3.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/aggrofinance/aggro-v1-sc/issues"
+  },
+  "homepage": "https://github.com/aggrofinance/aggro-v1-sc#readme"
 }
