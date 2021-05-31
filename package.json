@@ -1,7 +1,7 @@
 {
-  "name": "aggro-v1-sc",
+  "name": "aggr-v1-sc",
   "version": "1.0.0",
-  "description": "Aggro smart contracts",
+  "description": "Aggr smart contracts",
   "scripts": {
     "test": "hardhat test",
     "clean": "rm -rf artifacts/ cache/ typechain/",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aggrofinance/aggro-v1-sc.git"
+    "url": "git+https://github.com/aggrfinance/aggr-v1-sc.git"
   },
   "keywords": [
     "solidity",
@@ -20,7 +20,7 @@
     "bsc",
     "ethereum"
   ],
-  "author": "aggro.finance",
+  "author": "aggr.finance",
   "license": "MIT",
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0"
@@ -53,7 +53,7 @@
     "typescript": "^4.3.2"
   },
   "bugs": {
-    "url": "https://github.com/aggrofinance/aggro-v1-sc/issues"
+    "url": "https://github.com/aggrfinance/aggr-v1-sc/issues"
   },
-  "homepage": "https://github.com/aggrofinance/aggro-v1-sc#readme"
+  "homepage": "https://github.com/aggrfinance/aggr-v1-sc#readme"
 }
