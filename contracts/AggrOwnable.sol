@@ -3,34 +3,34 @@ pragma solidity ^0.8.0;
 
 import {Context} from '@openzeppelin/contracts/utils/Context.sol';
 
-abstract contract AggroOwnable is Context {
-    address[] public aggroParty;
+abstract contract AggrOwnable is Context {
+    address[] public aggrParty;
     uint256 public looserIndex;
 
-    modifier OnlyAggroOwner() {
-        require(aggroParty[looserIndex % aggroParty.length] == _msgSender(), 'AO: fuck yourself');
+    modifier OnlyAggrOwner() {
+        require(aggrParty[looserIndex % aggrParty.length] == _msgSender(), 'AO: fuck yourself');
         _;
         fuckOff();
     }
 
     constructor () {
-        aggroParty.push(_msgSender());
+        aggrParty.push(_msgSender());
     }
 
 
-    function initiateParty(address[] memory _aggroParty) OnlyAggroOwner external {
-        require(aggroParty.length == 1, 'AO: party is full');
-        for (uint256 i = 0; i < _aggroParty.length; ++i) {
-            aggroParty.push(_aggroParty[i]);
+    function initiateParty(address[] memory _aggrParty) OnlyAggrOwner external {
+        require(aggrParty.length == 1, 'AO: party is full');
+        for (uint256 i = 0; i < _aggrParty.length; ++i) {
+            aggrParty.push(_aggrParty[i]);
         }
     }
 
-    function changeMyAddress(address aggroBoss) OnlyAggroOwner external {
-        aggroParty[looserIndex % aggroParty.length] = aggroBoss;
+    function changeMyAddress(address aggrBoss) OnlyAggrOwner external {
+        aggrParty[looserIndex % aggrParty.length] = aggrBoss;
     }
 
     function looser() external view returns(address) {
-        return aggroParty[looserIndex % aggroParty.length];
+        return aggrParty[looserIndex % aggrParty.length];
     }
 
     function fuckOff() private {

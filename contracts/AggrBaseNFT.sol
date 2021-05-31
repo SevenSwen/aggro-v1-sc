@@ -8,17 +8,17 @@ import {Context} from '@openzeppelin/contracts/utils/Context.sol';
 import {Strings} from '@openzeppelin/contracts/utils/Strings.sol';
 import {ERC165} from '@openzeppelin/contracts/utils/introspection/ERC165.sol';
 
-import {AggroOwnable} from './AggroOwnable.sol';
+import {AggrOwnable} from './AggrOwnable.sol';
 
-contract AggroBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggroOwnable {
+contract AggrBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggrOwnable {
     using Address for address;
     using Strings for uint256;
 
     // Token name
-    string override public name = 'AggroNFT';
+    string override public name = 'AggrNFT';
 
     // Token symbol
-    string override public symbol = 'AGGRO';
+    string override public symbol = 'AGGR';
 
     // Token URL
     string public baseURI;
@@ -43,8 +43,8 @@ contract AggroBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggroOwnable
         _;
     }
 
-    // OnlyAggroOwner functions
-    function setBaseURI(string memory _baseURI) external OnlyAggroOwner {
+    // OnlyAggrOwner functions
+    function setBaseURI(string memory _baseURI) external OnlyAggrOwner {
         baseURI = _baseURI;
     }
 
