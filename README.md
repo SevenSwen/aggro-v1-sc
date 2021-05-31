@@ -1,5 +1,5 @@
-# aggro-v1-sc
-Aggro smart contracts
+# aggr-v1-sc
+Aggr smart contracts
 
 **Requirements**
 
