@@ -10,9 +10,8 @@ contract AggrNFT is AggrBaseNFT {
     uint256 private price;
     address private rich;
 
-    mapping(uint256 => address) public nftFrom;
-
-    constructor (IERC20 _token, uint256 _price, address _rich) {
+    constructor (string memory swearing, IERC20 _token, uint256 _price, address _rich)
+    AggrBaseNFT(swearing) {
         token = _token;
         price = _price;
         rich = _rich;
@@ -25,14 +24,14 @@ contract AggrNFT is AggrBaseNFT {
     function mint(address to, uint256 id, uint256 amount) external {
         require(amount >= price, 'AN: funds are not enough');
         token.transferFrom(_msgSender(), rich, amount);
-        nftFrom[id] = _msgSender();
-        _mint(to, id);
+        _mint(_msgSender(), id);
+        _transfer(_msgSender(), to, id);
     }
 
     function burn(uint256 id, uint256 amount) external {
         require(amount >= price * 10, 'AN: funds are not enough');
         token.transferFrom(_msgSender(), rich, amount - (price * 2));
-        token.transferFrom(_msgSender(), nftFrom[id], price * 2);
+        token.transferFrom(_msgSender(), _getRednecks(id), price * 2);
         _burn(id);
     }
 }

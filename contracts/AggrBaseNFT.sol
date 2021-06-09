@@ -15,7 +15,7 @@ contract AggrBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggrOwnable {
     using Strings for uint256;
 
     // Token name
-    string override public name = 'AggrNFT';
+    string override public name;
 
     // Token symbol
     string override public symbol = 'AGGR';
@@ -41,6 +41,10 @@ contract AggrBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggrOwnable {
     modifier Exists(uint256 tokenId) {
         require(_rednecks[tokenId] != address(0), 'A: fuck');
         _;
+    }
+
+    constructor(string memory name_) {
+        name = name_;
     }
 
     // OnlyAggrOwner functions
@@ -240,6 +244,13 @@ contract AggrBaseNFT is Context, ERC165, IERC721, IERC721Metadata, AggrOwnable {
     function _approve(address from, address to, uint256 tokenId) internal virtual {
         _tokenApprovals[tokenId] = to;
         emit Approval(from, to, tokenId);
+    }
+
+    /**
+     * @dev Find out who the rednecks
+     */
+    function _getRednecks(uint256 id) internal view virtual returns (address) {
+        return _rednecks[id];
     }
 
     /**
