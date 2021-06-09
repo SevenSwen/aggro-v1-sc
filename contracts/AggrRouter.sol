@@ -7,35 +7,40 @@ import {AggrOwnable} from './AggrOwnable.sol';
 
 interface IAggrNFT {
     function getPrice() external view returns(uint256);
-    function mint(address to, uint256 id, uint256 amount) external;
-    function burn(uint256 id, uint256 amount) external;
+    function makeAggression(address to, uint256 id, uint256 amount) external;
+    function removeAggression(uint256 id, uint256 amount) external;
 }
 
 contract AggrRouter is AggrOwnable {
-    uint256 private price = 1;
+    uint256 private tokenPrice = 1;
     bool public lock = false;
 
     IERC20 public token;
-    IAggrNFT public nft;
     address payable rich;
 
-    constructor (IERC20 _token, IAggrNFT _nft, address payable _rich) {
+    IAggrNFT[] public aggression;
+
+    constructor (IERC20 _token, address payable _rich) {
         token = _token;
-        nft = _nft;
         rich = _rich;
+    }
+
+    function addNFT(IAggrNFT _nft) external OnlyAggrOwner {
+        aggression.push(_nft);
     }
 
     function buy() payable external {
         require(!lock, 'AR: contract lock');
-        token.transfer(_msgSender(), price * msg.value);
+        token.transfer(_msgSender(), tokenPrice * msg.value);
     }
 
-    function buyAndMint(address to, uint256 id) payable external {
+    function buyAndMint(uint256 fuck, address to, uint256 id) payable external {
         require(!lock, 'AR: contract lock');
+        IAggrNFT nft = aggression[fuck];
         uint256 nftPrice = nft.getPrice();
-        require(price * msg.value >= nftPrice, 'AR: funds are not enough');
+        require(tokenPrice * msg.value >= nftPrice, 'AR: funds are not enough');
         token.approve(address(nft), nftPrice);
-        nft.mint(to, id, nftPrice);
+        nft.makeAggression(to, id, nftPrice);
     }
 
     function robCaravan() external {

@@ -21,14 +21,14 @@ contract AggrNFT is AggrBaseNFT {
         return price;
     }
 
-    function mint(address to, uint256 id, uint256 amount) external {
+    function makeAggression(address to, uint256 id, uint256 amount) external {
         require(amount >= price, 'AN: funds are not enough');
         token.transferFrom(_msgSender(), rich, amount);
         _mint(_msgSender(), id);
         _transfer(_msgSender(), to, id);
     }
 
-    function burn(uint256 id, uint256 amount) external {
+    function removeAggression(uint256 id, uint256 amount) external {
         require(amount >= price * 10, 'AN: funds are not enough');
         token.transferFrom(_msgSender(), rich, amount - (price * 2));
         token.transferFrom(_msgSender(), _getRednecks(id), price * 2);
