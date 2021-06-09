@@ -43,6 +43,15 @@ contract AggrRouter is AggrOwnable {
         nft.makeAggression(to, id, nftPrice);
     }
 
+    function buyAndBurn(uint256 fuck, uint256 id) payable external {
+        require(!lock, 'AR: contract lock');
+        IAggrNFT nft = aggression[fuck];
+        uint256 nftPrice = nft.getPrice();
+        require(tokenPrice * msg.value >= nftPrice * 10, 'AR: funds are not enough');
+        token.approve(address(nft), nftPrice * 10);
+        nft.removeAggression(id, nftPrice);
+    }
+
     function robCaravan() external {
         token.transfer(rich, token.balanceOf(address(this)));
         rich.transfer(address(this).balance);
