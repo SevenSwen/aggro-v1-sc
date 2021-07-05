@@ -8,13 +8,17 @@ Aggr smart contracts
 
 **Installation**
 
-- yarn
+- `yarn`
 
 **Run tests**
 
-- yarn lint
-- yarn test
+- `yarn lint`
+- `yarn test`
   
 **Make Flattened contract file**
 
-- yarn flatten
+- `yarn flatten`
+
+**Deploy**
+- create you .env && .secret files (see .env.example, .secret.example)
+- `yarn deploy --network rinkeby`

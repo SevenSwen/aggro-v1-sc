@@ -1,17 +1,36 @@
 import '@typechain/hardhat'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
-import "hardhat-gas-reporter"
+import "@nomiclabs/hardhat-etherscan"
 import "solidity-coverage"
+import "hardhat-gas-reporter"
+import 'hardhat-deploy'
+import 'hardhat-deploy-ethers'
+import fs from 'fs';
+import dotenv from 'dotenv'
+dotenv.config()
+const mnemonic = fs.readFileSync('.secret').toString().trim();
 
-import { HardhatUserConfig } from 'hardhat/types'
-
-const config: HardhatUserConfig = {
-    defaultNetwork: 'hardhat',
+export default {
     networks: {
         hardhat: {
             allowUnlimitedContractSize: false,
         },
+        mainnet: {
+            url: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
+            chainId: 1,
+            gasPrice: 7000000000,
+            accounts: {mnemonic: mnemonic}
+        },
+        rinkeby: {
+            url: `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`,
+            chainId: 4,
+            gasPrice: 7000000000,
+            accounts: {mnemonic: mnemonic}
+        },
+    },
+    etherscan: {
+        apiKey: process.env.ETHERSCAN_API_KEY,
     },
     solidity: {
         version: '0.8.3',
@@ -28,6 +47,10 @@ const config: HardhatUserConfig = {
             },
         },
     },
+    namedAccounts: {
+        deployer: 0,
+    },
+    paths: {
+        sources: 'contracts',
+    },
 }
-
-export default config
